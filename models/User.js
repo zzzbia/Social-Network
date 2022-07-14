@@ -5,7 +5,7 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 		unique: true,
-		trimmed: true,
+		trim: true,
 	},
 	email: {
 		type: String,
@@ -17,8 +17,19 @@ const userSchema = new Schema({
 			},
 		},
 	},
-	thoughts: [thoughtsSchema],
-	friends: [userSchema],
+	thoughts: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Thoughts",
+		},
+	],
+
+	friends: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "User",
+		},
+	],
 	toJSON: {
 		virtuals: true,
 	},
@@ -33,5 +44,5 @@ userSchema
 		this.friends.length = friendCount;
 	});
 
-const User = model("User", userSchema);
+const Users = model("User", userSchema);
 module.exports = User;

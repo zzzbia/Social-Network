@@ -19,6 +19,8 @@ const reactionSchema = new Schema(
 		createdAt: {
 			type: Date,
 			default: Date.now,
+			get: (createdAtTime) =>
+				moment(createdAtTime).format("MMM Do YYYY, h:mm a"),
 		},
 	},
 	{
@@ -28,8 +30,6 @@ const reactionSchema = new Schema(
 		id: false,
 	}
 );
-
-//get method to format the date
 
 const thoughtSchema = new Schema(
 	{
@@ -42,7 +42,8 @@ const thoughtSchema = new Schema(
 		createdAt: {
 			type: Date,
 			default: Date.now,
-			//needs getter to format the date
+			get: (createdAtTime) =>
+				moment(createdAtTime).format("MMM Do YYYY, h:mm a"),
 		},
 		username: {
 			type: String,
